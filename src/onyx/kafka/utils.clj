@@ -3,7 +3,6 @@
             [franzy.clients.consumer.protocols :refer [poll! assign-partitions!]]
             [franzy.serialization.serializers :refer [byte-array-serializer]]
             [franzy.serialization.deserializers :refer [byte-array-deserializer]]
-            [onyx.plugin.kafka :refer [id->broker]]
             [taoensso.timbre :as log]
             [aero.core :refer [read-config]]
             [clojure.core.async :as async]))
@@ -17,7 +16,7 @@
 (defn- make-consumer
   [zk-addr]
   (consumer/make-consumer
-   {:bootstrap.servers (vals (id->broker zk-addr))
+   {:bootstrap.servers ""
     :group.id "onyx-consumer"
     :auto.offset.reset :earliest
     :receive.buffer.bytes 65536
